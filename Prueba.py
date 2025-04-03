@@ -13,6 +13,7 @@ warnings.filterwarnings('ignore')
 
 from scipy import stats
 import matplotlib.pyplot as plt
+import streamlit as st
 
 # Obtener la fecha de hoy en formato YYYY-MM-DD
 hoy = datetime.today().strftime('%Y-%m-%d')
@@ -21,6 +22,7 @@ df = yf.download('^DJI', start='2010-01-01', end=hoy, progress=False)
 
 rendimiento_simple = df["Close"].pct_change().dropna()
 #rendimiento_simple
+
 
 media = np.mean(rendimiento_simple)
 sesgo = skew(rendimiento_simple)
@@ -303,5 +305,14 @@ def violaciones_var_movil(df_resultados, rendimiento):
 
 vol = var_volatilidad_movil(rendimiento_log)
 vio = violaciones_var_movil(vol, rendimiento_log)
+
+
+st.title("Primer proyecto de Métodos Cuantitativos en Finanzas")
+st.header("Integrantes:"    )
+st.header("Contreras Poblano Valentina")
+st.header("Velazquez Valtierra Alejandro")
+
+st.markdown("**###Rendimientos simples")
+st.dataframe(rendimiento_simple)
 
 var_volatilidad_movil(rendimiento_log)
